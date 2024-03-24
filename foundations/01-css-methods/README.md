@@ -8,9 +8,9 @@ There are three elements for you to add styles to, each of which uses a differen
 
 The properties you need to add to each element are:
 
-* `div`: a red background, white text, a font size of 32px, center aligned, and bold
-* `p`: a green background, white text, and a font size of 18px
-* `button`: an orange background and a font size of 18px
+* `div`: a red background, white text, a font size of 32px, center aligned, and bold - external
+* `p`: a green background, white text, and a font size of 18px - internal
+* `button`: an orange background and a font size of 18px - inline
 
 ## Desired Outcome
 ![desired outcome](./desired-outcome.png)
