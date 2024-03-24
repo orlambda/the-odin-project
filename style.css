@@ -6,3 +6,11 @@ h1.coffee
 {
     color: brown;
 }
+
+body {
+    background-color: #cedede;
+}
+
+body.coffee {
+    background-color: #cc8531;
+}
