@@ -1,5 +1,13 @@
 h1 {
+    text-align: center;
     color: green;
+}
+
+.main-container {
+    width: 400px;
+    background: #efeffa;
+    padding: 25px;
+    margin: 16px auto;
 }
 
 h1.coffee
@@ -13,4 +21,10 @@ body {
 
 body.coffee {
     background-color: #cc8531;
+}
+
+.footer {
+    margin-top: 25px;
+    font-size: 13px;
+    text-align: center;
 }
