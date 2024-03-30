@@ -22,7 +22,7 @@ body (flex column)
     content (flex column)
         information (flex column)
             title
-            cards (flex - wrap?)
+            cards-container (flex - wrap?)
                 card (block or flex column?) * 4
                     image
                     text
@@ -35,5 +35,5 @@ body (flex column)
                     title
                     text
                 button
-    footer
+    footer (flex)
         text
