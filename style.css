@@ -2,12 +2,18 @@ body {
     display: flex;
     flex-direction: column;
     background-color: white;
+    justify-content: space-between;
 }
 
 .header {
     display: flex;
     flex-direction: column;
-
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 100px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .header-top {
@@ -63,6 +69,12 @@ body {
 
 .footer {
     display: flex;
+    flex-shrink: 0;
+    flex-grow: 0;
+    flex-basis: 50px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
 }
 
 .header, .footer {
