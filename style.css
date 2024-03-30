@@ -1,6 +1,7 @@
 body {
     display: flex;
     flex-direction: column;
+    background-color: white;
 }
 
 .header {
@@ -36,16 +37,17 @@ body {
 .card {
     display: flex;
     flex-direction: column;
-
 }
 
 .quote {
     display: flex;
     flex-direction: column;
+    background-color: gray;
 }
 
 .call-to-action-container {
     display: flex;
+    background-color: lightblue;
 }
 
 .call-to-action-box {
@@ -54,4 +56,8 @@ body {
 
 .footer {
     display: flex;
+}
+
+.header, .footer {
+    background-color: blue;
 }
