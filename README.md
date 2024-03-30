@@ -8,7 +8,7 @@ body (flex column)
     header (flex column)
         header-top (flex)
             header-logo
-            header-links (ul, margin-left: auto)
+            header-links (ul, margin-left: auto, flex)
                 one
                 two
                 three
