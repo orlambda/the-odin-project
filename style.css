@@ -1,0 +1,57 @@
+body {
+    display: flex;
+    flex-direction: column;
+}
+
+.header {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.header-top {
+    display: flex;
+}
+
+.header-bottom {
+    display: flex;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+}
+
+.content .information {
+    display: flex;
+    flex-direction: column;
+}
+
+
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+
+}
+
+.quote {
+    display: flex;
+    flex-direction: column;
+}
+
+.call-to-action-container {
+    display: flex;
+}
+
+.call-to-action-box {
+    display: flex;
+}
+
+.footer {
+    display: flex;
+}
