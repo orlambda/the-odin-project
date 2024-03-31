@@ -12,7 +12,7 @@ body {
     flex-shrink: 0;
     flex-grow: 0;
     flex-basis: 100px;
-    padding: 10px;
+    padding: 18px;
     justify-content: center;
     align-items: center;
 }
@@ -30,6 +30,17 @@ body {
 
 .header-bottom {
     display: flex;
+    margin: 60px 150px;
+}
+
+.header-bottom-left {
+    display: flex;
+    flex-direction: column;
+    flex-basis: 100%;
+}
+
+.header-bottom-right {
+    flex-basis: 100%;
 }
 
 .content {
@@ -56,6 +67,10 @@ body {
 .card {
     display: flex;
     flex-direction: column;
+}
+
+.card img {
+    border-radius: 25px;
 }
 
 .quote {
