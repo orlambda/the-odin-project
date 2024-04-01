@@ -41,6 +41,11 @@ body {
     gap: 15px;
 }
 
+.header-top a {
+    text-decoration: none;
+    color: #E5E7Eb;
+}
+
 .header-bottom {
     display: flex;
     margin: 60px 220px;
