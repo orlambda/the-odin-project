@@ -187,8 +187,7 @@ button {
     min-width: 80px;
     flex-grow: 0;
     flex-shrink: 0;
-    padding-top: 3px;
-    padding-bottom: 3px;
+    padding: 10px 15px;
     color: white;
 }
 
