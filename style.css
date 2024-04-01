@@ -134,6 +134,8 @@ body {
     gap: 50px;
     justify-content: space-between;
     color: white;
+    border-radius: 5px;
+    border-width: 0px;
 }
 
 .call-to-action-box text {
