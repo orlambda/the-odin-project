@@ -17,7 +17,6 @@ function playGame() {
     }
 
 function playRound(humanChoice, computerChoice) {
-    humanChoice = humanChoice.toLowerCase();
     
     // if same
         // print
@@ -45,8 +44,8 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    // get input
-
+    var answer = prompt("Rock, paper, or scissors?");
+    return answer.toLowerCase;
 }
 
 // global variables
