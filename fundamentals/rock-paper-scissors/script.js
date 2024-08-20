@@ -31,10 +31,12 @@ function playRound(humanChoice, computerChoice) {
 }
 
 function getComputerChoice() {
+    // 1 in 3 chance, rock paper scissors
 
 }
 
 function getHumanChoice() {
+    // get input
 
 }
 
