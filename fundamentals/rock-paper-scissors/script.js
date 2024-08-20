@@ -1,3 +1,5 @@
+playGame();
+
 // functions
 
 function playGame() {
@@ -16,15 +18,19 @@ function playGame() {
 
 function playRound(humanChoice, computerChoice) {
     
-    // if same
-        // print
-
-    // else if human wins
-        // print
-
-    // else computer wins
-        // print
-
+    if (humanChoice === computerChoice) {
+        humanScore++;
+        computerScore++;
+        console.log(`Both played ${humanChoice}! Tie.`)
+    } else if ((humanChoice === "rock" && computerChoice === "scissors")
+            || (humanChoice === "paper" && computerChoice === "rock")
+            || (humanChoice === "scissors" && computerChoice === "paper")) {
+        humanScore++;
+        console.log(`Your ${humanChoice} beats ${computerChoice}!`)
+    } else {
+        computerScore++;
+        console.log(`Your ${humanChoice} loses to ${computerChoice}!`)
+    }
 }
 
 function getComputerChoice() {
