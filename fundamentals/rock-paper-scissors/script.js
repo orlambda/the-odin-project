@@ -32,7 +32,16 @@ function playRound(humanChoice, computerChoice) {
 
 function getComputerChoice() {
     // 1 in 3 chance, rock paper scissors
-
+    result = Math.random * 3;
+    if (result >= 2) {
+        return "rock";
+    }
+    else if (result >= 1) {
+        return "paper";
+    }
+    else {
+        return "scissors";
+    }
 }
 
 function getHumanChoice() {
