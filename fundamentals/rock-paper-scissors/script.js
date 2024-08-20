@@ -44,8 +44,10 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    var answer = prompt("Rock, paper, or scissors?");
-    return answer.toLowerCase;
+    var answer = prompt("Rock, paper, or scissors?").toLowerCase;
+    while (!(answer === "rock" || answer === "paper" || answer === "scissors")) {
+        answer = prompt("Please choce rock, paper, or scissors.").toLowerCase;
+    }
 }
 
 // global variables
