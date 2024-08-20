@@ -1,5 +1,3 @@
-console.log("Hello World")
-
 // functions
 
 function playGame() {
@@ -31,7 +29,7 @@ function playRound(humanChoice, computerChoice) {
 
 function getComputerChoice() {
     // 1 in 3 chance, rock paper scissors
-    result = Math.random * 3;
+    var result = Math.random() * 3;
     if (result >= 2) {
         return "rock";
     }
@@ -56,3 +54,30 @@ var humanScore = 0
 
 var computerScore = 0
 
+
+
+// --------------------------------------------------------------------------
+// Tests for getComputerChoice():
+
+// var a = 0;
+// var b = 0;
+// var c = 0;
+// var d = 0;
+
+// for (var i = 0; i < 2000; i++) {
+//     switch (getComputerChoice()) {
+//         case "rock":
+//             a++;
+//             break;
+//         case "paper":
+//             b++;
+//             break;
+//         case "scissors":
+//             c++;
+//             break;
+//         default:
+//             d++;
+//     }    
+// }
+
+// console.log(`a is ${a}, b is ${b}, c is ${c}, d (should be 0) is ${d}`);
