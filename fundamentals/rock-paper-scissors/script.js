@@ -1,20 +1,24 @@
-playGame();
+var humanScore = 0
 
-// functions
+var computerScore = 0
+
+playGame();
 
 function playGame() {
 
     for (var i = 0; i < 5; i++)
         {
             playRound(getHumanChoice(), getComputerChoice())
-        }        
-
-    // print winner
-    // if draw
-    // else if human wins
-    // else computer wins
-
+        }
+    console.log(`You scored ${humanScore} vs ${computerScore}.`);
+    if (humanScore > computerScore) {
+        console.log("Well done!");
+    } else if (computerScore > humanScore) {
+        console.log("Too bad!");
+    } else {
+        console.log("Could be worse I guess!");
     }
+}        
 
 function playRound(humanChoice, computerChoice) {
     
@@ -48,17 +52,12 @@ function getComputerChoice() {
 }
 
 function getHumanChoice() {
-    var answer = prompt("Rock, paper, or scissors?").toLowerCase;
+    var answer = prompt("Rock, paper, or scissors?").toLowerCase();
     while (!(answer === "rock" || answer === "paper" || answer === "scissors")) {
-        answer = prompt("Please choce rock, paper, or scissors.").toLowerCase;
+        answer = prompt("Please choose rock, paper, or scissors.").toLowerCase();
     }
+    return answer;
 }
-
-// global variables
-
-var humanScore = 0
-
-var computerScore = 0
 
 
 
