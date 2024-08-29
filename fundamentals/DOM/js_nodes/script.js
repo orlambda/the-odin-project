@@ -20,7 +20,10 @@ borderedDiv.style.backgroundColor = "pink";
 // These would cancel the pink backgroundColor
 // borderedDiv.style.cssText = "border:1px solid black;";
 // borderedDiv.setAttribute("style", "border:1px solid black;")
-borderedDiv.style.border = "15px solid blue";
+// This works (probably not good practice)
+borderedDiv.style.cssText += "border:15px solid blue;";
+// This works too:
+// borderedDiv.style.border = "15px solid blue";
 
     // inside borderedDiv:
     const borderedH1 = document.createElement("h1");
