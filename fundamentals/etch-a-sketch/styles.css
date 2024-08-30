@@ -1,0 +1,17 @@
+.grid {
+    display: flex;
+    border: solid 2px black;
+}
+
+.row {
+    display: flex;
+}
+
+.cell {
+    border: solid 1px inset lightgray;
+    background-color: white;
+}
+
+.cell:hover {
+    background-color: black;
+}
