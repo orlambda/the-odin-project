@@ -6,7 +6,7 @@ playGame();
 
 function playGame() {
 
-    for (var i = 0; i < 5; i++)
+    while (humanScore < 5 && computerScore < 5)
         {
             playRound(getHumanChoice(), getComputerChoice())
         }
