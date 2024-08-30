@@ -19,25 +19,28 @@ function playGame() {
     } else {
         finalScoreNotification += "Could be worse I guess!";
     }
-    const resultDiv = document.querySelector(".result");
-    resultDiv.innerText = finalScoreNotification;
+    const finalResultDiv = document.querySelector(".finalResult");
+    finalResultDiv.innerText = finalScoreNotification;
 }        
 
 function playRound(humanChoice, computerChoice, scores) {
     
+    let roundScoreNotification = "";
     if (humanChoice === computerChoice) {
         scores.human++;
         scores.computer++;
-        console.log(`Both played ${humanChoice}! Tie.`)
+        roundScoreNotification = `Both played ${humanChoice}! Tie.`;
     } else if ((humanChoice === "rock" && computerChoice === "scissors")
             || (humanChoice === "paper" && computerChoice === "rock")
             || (humanChoice === "scissors" && computerChoice === "paper")) {
         scores.human++;
-        console.log(`Your ${humanChoice} beats ${computerChoice}!`)
+        roundScoreNotification = `Your ${humanChoice} beats ${computerChoice}!`;
     } else {
         scores.computer++;
-        console.log(`Your ${humanChoice} loses to ${computerChoice}!`)
+        roundScoreNotification = `Your ${humanChoice} loses to ${computerChoice}!`;
     }
+    const roundResultDiv = document.querySelector(".roundResult");
+    roundResultDiv.innerText = roundScoreNotification;
 }
 
 function getComputerChoice() {
