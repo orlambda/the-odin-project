@@ -60,6 +60,17 @@ function getHumanChoice() {
     return answer;
 }
 
+// Buttons
+
+const buttons = document.querySelectorAll("button");
+buttons.forEach((button) => {
+    const answer = button.innerText;
+    console.log(answer);
+    // button.addEventListener((click) => {
+    //     const answer = button.innerText.toLowerCase();
+    //     console.log(`Clicked on ${answer}`);
+    })
+
 // --------------------------------------------------------------------------
 // Tests for getComputerChoice():
 
