@@ -6,25 +6,19 @@ function playGame() {
         human: 0,
         computer: 0,
     };
-
-    while (scores.human < 5 && scores.computer < 5)
-        {
-            playRound(getHumanChoice(), getComputerChoice(), scores)
-        }
-    let finalScoreNotification = `You scored ${scores.human} vs ${scores.computer}. `;
-    if (scores.human > scores.computer) {
-        finalScoreNotification += "Well done!";
-    } else if (scores.computer > scores.human) {
-        finalScoreNotification += "Too bad!";
-    } else {
-        finalScoreNotification += "Could be worse I guess!";
-    }
-    const finalResultDiv = document.querySelector(".finalResult");
-    finalResultDiv.innerText = finalScoreNotification;
-}        
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.addEventListener('click', () => {
+            const answer = button.innerText.toLowerCase();
+            playRound(answer, getComputerChoice(), scores);
+        });
+    })
+}
 
 function playRound(humanChoice, computerChoice, scores) {
-    
+    if (scores.human >= 5 || scores.computer >= 5) {
+        return;
+    }
     let roundScoreNotification = "";
     if (humanChoice === computerChoice) {
         scores.human++;
@@ -41,6 +35,12 @@ function playRound(humanChoice, computerChoice, scores) {
     }
     const roundResultDiv = document.querySelector(".roundResult");
     roundResultDiv.innerText = roundScoreNotification;
+    if (scores.human >= 5 || scores.computer >= 5) {
+        showFinalScores(scores);
+        disableButtons();
+    } else {
+        showCurrentScores(scores);
+    }
 }
 
 function getComputerChoice() {
@@ -65,17 +65,33 @@ function getHumanChoice() {
     return answer;
 }
 
-// Buttons
-
-const buttons = document.querySelectorAll("button");
-buttons.forEach((button) => {
-    const answer = button.innerText;
-    console.log(answer);
-    // button.addEventListener((click) => {
-    //     const answer = button.innerText.toLowerCase();
-    //     console.log(`Clicked on ${answer}`);
+function disableButtons() {
+    const buttons = document.querySelectorAll("button");
+    buttons.forEach((button) => {
+        button.removeEventListener("click");
     })
+}
 
+function showCurrentScores(scores) {
+    let currentScoreNotification = `You: ${scores.human}, Computer: ${scores.computer}`;
+    const currentResultDiv = document.querySelector(".currentResult");
+    currentResultDiv.innerText = currentScoreNotification;
+}
+
+function showFinalScores(scores) {
+    const currentResultDiv = document.querySelector(".currentResult");
+    currentResultDiv.innerText = "";
+    let finalScoreNotification = `You scored ${scores.human} vs ${scores.computer}. `;
+    if (scores.human > scores.computer) {
+        finalScoreNotification += "Well done!";
+    } else if (scores.computer > scores.human) {
+        finalScoreNotification += "Too bad!";
+    } else {
+        finalScoreNotification += "Could be worse I guess!";
+    }
+    const finalResultDiv = document.querySelector(".finalResult");
+    finalResultDiv.innerText = finalScoreNotification;
+}
 // --------------------------------------------------------------------------
 // Tests for getComputerChoice():
 
