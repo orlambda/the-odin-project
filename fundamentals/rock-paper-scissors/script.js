@@ -1,38 +1,39 @@
-var humanScore = 0
-
-var computerScore = 0
-
 playGame();
 
 function playGame() {
 
-    while (humanScore < 5 && computerScore < 5)
+    const scores = {
+        human: 0,
+        computer: 0,
+    };
+
+    while (scores.human < 5 && scores.computer < 5)
         {
-            playRound(getHumanChoice(), getComputerChoice())
+            playRound(getHumanChoice(), getComputerChoice(), scores)
         }
-    console.log(`You scored ${humanScore} vs ${computerScore}.`);
-    if (humanScore > computerScore) {
+    console.log(`You scored ${scores.human} vs ${scores.computer}.`);
+    if (scores.human > scores.computer) {
         console.log("Well done!");
-    } else if (computerScore > humanScore) {
+    } else if (scores.computer > scores.human) {
         console.log("Too bad!");
     } else {
         console.log("Could be worse I guess!");
     }
 }        
 
-function playRound(humanChoice, computerChoice) {
+function playRound(humanChoice, computerChoice, scores) {
     
     if (humanChoice === computerChoice) {
-        humanScore++;
-        computerScore++;
+        scores.human++;
+        scores.computer++;
         console.log(`Both played ${humanChoice}! Tie.`)
     } else if ((humanChoice === "rock" && computerChoice === "scissors")
             || (humanChoice === "paper" && computerChoice === "rock")
             || (humanChoice === "scissors" && computerChoice === "paper")) {
-        humanScore++;
+        scores.human++;
         console.log(`Your ${humanChoice} beats ${computerChoice}!`)
     } else {
-        computerScore++;
+        scores.computer++;
         console.log(`Your ${humanChoice} loses to ${computerChoice}!`)
     }
 }
@@ -58,8 +59,6 @@ function getHumanChoice() {
     }
     return answer;
 }
-
-
 
 // --------------------------------------------------------------------------
 // Tests for getComputerChoice():
