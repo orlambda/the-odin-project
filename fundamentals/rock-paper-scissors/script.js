@@ -57,14 +57,7 @@ function getComputerChoice() {
     }
 }
 
-function getHumanChoice() {
-    var answer = prompt("Rock, paper, or scissors?").toLowerCase();
-    while (!(answer === "rock" || answer === "paper" || answer === "scissors")) {
-        answer = prompt("Please choose rock, paper, or scissors.").toLowerCase();
-    }
-    return answer;
-}
-
+// TODO: move anonymous function to a named function to allow removeEventListener, or delete disableButtons().
 function disableButtons() {
     const buttons = document.querySelectorAll("button");
     buttons.forEach((button) => {
