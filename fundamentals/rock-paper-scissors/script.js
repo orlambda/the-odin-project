@@ -11,14 +11,16 @@ function playGame() {
         {
             playRound(getHumanChoice(), getComputerChoice(), scores)
         }
-    console.log(`You scored ${scores.human} vs ${scores.computer}.`);
+    let finalScoreNotification = `You scored ${scores.human} vs ${scores.computer}. `;
     if (scores.human > scores.computer) {
-        console.log("Well done!");
+        finalScoreNotification += "Well done!";
     } else if (scores.computer > scores.human) {
-        console.log("Too bad!");
+        finalScoreNotification += "Too bad!";
     } else {
-        console.log("Could be worse I guess!");
+        finalScoreNotification += "Could be worse I guess!";
     }
+    const resultDiv = document.querySelector(".result");
+    resultDiv.innerText = finalScoreNotification;
 }        
 
 function playRound(humanChoice, computerChoice, scores) {
