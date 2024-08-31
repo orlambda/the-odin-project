@@ -13,11 +13,6 @@ function make_grid(n) {
     }
     clear_grid();
     const grid = document.querySelector(".grid");
-    // calculate the width of the grid
-    // calculate the width of the cells
-    // DECIDE: round total grid size down to total of cells
-        // OR: divide excess and add to cells (grid always same width)
-        // OR: unnecessary because flexbox?!
     for (let i = 0; i < n; i++) {
         console.log("making a row");
         const row = document.createElement("div");
@@ -26,7 +21,6 @@ function make_grid(n) {
             console.log("making a cell!");
             const cell = document.createElement("div");
             cell.className = "cell";
-            cell.textContent="0";
             row.appendChild(cell);
         }
         grid.appendChild(row);
@@ -34,10 +28,10 @@ function make_grid(n) {
 }
 
 function clear_grid() {
-    // For each row
-        // For each cell
-            // Remove cell node
-        // Remove row node
+    const grid = document.querySelector(".grid");
+    while (grid.firstChild) {
+        grid.firstChild.remove();
+    }
 }
 
 function enable_input() {
