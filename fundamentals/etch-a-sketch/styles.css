@@ -1,10 +1,12 @@
 .grid {
     display: flex;
+    flex-direction: column;
     border: solid 2px black;
 }
 
 .row {
     display: flex;
+    flex-direction: row;
 }
 
 .cell {
