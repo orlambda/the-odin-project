@@ -35,6 +35,10 @@ function clear_grid() {
 }
 
 function enable_input() {
-    // Add event listener to button
-        // make_grid(button.value)
+    document.querySelector('form').addEventListener('submit', e => {
+        e.preventDefault();
+        const data = new FormData(e.target);
+        let n = Object.fromEntries(data.entries())
+        make_grid(parseInt(n.Cells));
+      }); 
 }
