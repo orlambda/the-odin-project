@@ -1,7 +1,25 @@
 make_grid(16);
 enable_input();
+makeAllCellsResponsive();  
 
 function make_grid(n) {
+    if (!checkCellRange(n)) {return}
+    clear_grid();
+    const grid = document.querySelector(".grid");
+    for (let i = 0; i < n; i++) {
+        const row = document.createElement("div");
+        row.className = "row";
+        for (let j = 0; j < n; j++) {
+            const cell = document.createElement("div");
+            cell.className = "cell";
+            row.appendChild(cell);
+        }
+        grid.appendChild(row);
+    }
+    makeAllCellsResponsive("black");    
+}
+
+function checkCellRange(n) {
     // Only accept numbers from 1 to 100
     // Don't clear grid for invalid input
     const min = 1;
@@ -9,22 +27,9 @@ function make_grid(n) {
     if (!Number.isInteger(n) || n < min || n > max) {
         // TODO: Output to error div
         console.log("ERROR!");
-        return
+        return false;
     }
-    clear_grid();
-    const grid = document.querySelector(".grid");
-    for (let i = 0; i < n; i++) {
-        console.log("making a row");
-        const row = document.createElement("div");
-        row.className = "row";
-        for (let j = 0; j < n; j++) {
-            console.log("making a cell!");
-            const cell = document.createElement("div");
-            cell.className = "cell";
-            row.appendChild(cell);
-        }
-        grid.appendChild(row);
-    }    
+    return true;
 }
 
 function clear_grid() {
@@ -41,4 +46,34 @@ function enable_input() {
         let n = Object.fromEntries(data.entries())
         make_grid(parseInt(n.Cells));
       }); 
+}
+
+function applyDefaultGridBehaviour () {
+    // applyGridBehaviour((cell) => setCellColor(cell, "black;"));
+}
+
+function applyGridBehaviour (fn) {
+    // const cells = document.querySelectorAll(".cell");
+    // cells.forEach((cell) => cell.addEventListener('click', (cell) => fn(cell)));
+}
+
+function fillCell(cell, color) {
+    console.log(color);
+    // cell.setAttribute("style", `background-color:${color}`);
+    cell.setAttribute("style", `background-color:black`);
+}
+
+function makeCellResponsive (cell, color) {
+    cell.addEventListener('mouseover', (e) => fillCell(cell, color))
+}
+
+function makeAllCellsResponsive(color) {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => makeCellResponsive(cell, color));
+}
+
+
+function removeEventListeners(cell) {
+    // WARNING: clears event listeners on child nodes
+    newCell = cell.cloneNode(true);
 }
