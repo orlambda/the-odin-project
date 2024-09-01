@@ -1,6 +1,5 @@
 make_grid(16);
 enable_input();
-makeAllCellsResponsive();  
 
 function make_grid(n) {
     if (!checkCellRange(n)) {return}
@@ -16,7 +15,7 @@ function make_grid(n) {
         }
         grid.appendChild(row);
     }
-    makeAllCellsResponsive("black");    
+    makeAllCellsResponsive("black");
 }
 
 function checkCellRange(n) {
@@ -59,21 +58,26 @@ function applyGridBehaviour (fn) {
 
 function fillCell(cell, color) {
     console.log(color);
-    // cell.setAttribute("style", `background-color:${color}`);
-    cell.setAttribute("style", `background-color:black`);
+    cell.setAttribute("style", `background-color:${color}`);
 }
 
 function makeCellResponsive (cell, color) {
-    cell.addEventListener('mouseover', (e) => fillCell(cell, color))
+    cell.addEventListener('mouseenter', (e) => fillCell(cell, color))
 }
 
 function makeAllCellsResponsive(color) {
+    removeAllEventListeners();
     const cells = document.querySelectorAll(".cell");
     cells.forEach((cell) => makeCellResponsive(cell, color));
 }
 
+function removeAllEventListeners() {
+    const cells = document.querySelectorAll(".cell");
+    cells.forEach((cell) => removeEventListeners(cell));    
+}
 
 function removeEventListeners(cell) {
-    // WARNING: clears event listeners on child nodes
+    // WARNING: also clears event listeners on child nodes
     newCell = cell.cloneNode(true);
+    cell.parentNode.replaceChild(newCell, cell);
 }
