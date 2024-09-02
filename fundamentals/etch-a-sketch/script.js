@@ -15,6 +15,7 @@ function make_grid(n) {
         for (let j = 0; j < n; j++) {
             const cell = document.createElement("div");
             cell.className = "cell";
+            cell.setAttribute("style", `opacity:1`);
             row.appendChild(cell);
         }
         grid.appendChild(row);
@@ -55,7 +56,6 @@ function enable_buttons() {
     const buttons = Array.from(document.querySelector(".buttons").children);
     buttons.forEach((button) => button.addEventListener('click', () => {
         currentInkEffect = button.id;
-
     }));
 }
 
@@ -68,6 +68,22 @@ function updateCellEffect(cell, color) {
             color = randomColor();
             cell.setAttribute("style", `background-color:${color}`);
             break;
+        case "gradual-ink":
+            console.log(getComputedStyle(cell)["background-color"]);
+            console.log(getComputedStyle(cell)["opacity"]);
+            if (getComputedStyle(cell)["background-color"] === "rgb(0, 0, 0)") {
+                let opacity = getComputedStyle(cell)["opacity"];                
+                if (opacity === "1") {
+                    break;
+                }
+                cell.style.opacity = parseFloat(cell.style.opacity) + 0.1
+                break;
+            }
+            // cell.setAttribute("style", `background-color:black; opacity:0.1`);
+            cell.setAttribute("style", `background-color:black`);
+            cell.style.opacity = 0.1;
+            break;
+        default:
     }
 }
 
