@@ -37,7 +37,7 @@
 }
 
 .cell {
-    border: solid 1px lightgray;
+    /* border: solid 1px lightgray; */
     background-color: white;
     flex: 1 0 auto;
     aspect-ratio: 1 / 1 ;
