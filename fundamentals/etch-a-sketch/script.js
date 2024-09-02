@@ -1,5 +1,8 @@
+let currentInk = "black-ink";
+
 make_grid(16);
-enable_input();
+enable_form();
+enable_buttons();
 
 function make_grid(n) {
     if (!checkCellRange(n)) {return}
@@ -38,7 +41,7 @@ function clear_grid() {
     }
 }
 
-function enable_input() {
+function enable_form() {
     document.querySelector('form').addEventListener('submit', e => {
         e.preventDefault();
         const data = new FormData(e.target);
@@ -47,13 +50,9 @@ function enable_input() {
       }); 
 }
 
-function applyDefaultGridBehaviour () {
-    // applyGridBehaviour((cell) => setCellColor(cell, "black;"));
-}
-
-function applyGridBehaviour (fn) {
-    // const cells = document.querySelectorAll(".cell");
-    // cells.forEach((cell) => cell.addEventListener('click', (cell) => fn(cell)));
+function enable_buttons() {
+    const buttons = Array.from(document.querySelector(".buttons").children);
+    buttons.forEach((button) => button.addEventListener('click', () => currentInk = button.id));
 }
 
 function fillCell(cell, color) {
