@@ -1,6 +1,7 @@
-let currentInk = "black-ink";
+let currentInkEffect = "black-ink";
+let currentCells = 16;
 
-make_grid(16);
+make_grid(currentCells, currentInkEffect);
 enable_form();
 enable_buttons();
 
@@ -18,7 +19,7 @@ function make_grid(n) {
         }
         grid.appendChild(row);
     }
-    makeAllCellsResponsive("black");
+    makeAllCellsResponsive("black", currentInkEffect);
 }
 
 function checkCellRange(n) {
@@ -52,16 +53,60 @@ function enable_form() {
 
 function enable_buttons() {
     const buttons = Array.from(document.querySelector(".buttons").children);
-    buttons.forEach((button) => button.addEventListener('click', () => currentInk = button.id));
+    buttons.forEach((button) => button.addEventListener('click', () => {
+        currentInkEffect = button.id;
+
+    }));
 }
 
-function fillCell(cell, color) {
-    console.log(color);
-    cell.setAttribute("style", `background-color:${color}`);
+function updateCellEffect(cell, color) {
+    switch (currentInkEffect) {
+        case "black-ink":
+            cell.setAttribute("style", `background-color:${color}`);
+            break;
+        case "rainbow-ink":
+            color = randomColor();
+            cell.setAttribute("style", `background-color:${color}`);
+            break;
+    }
 }
 
-function makeCellResponsive (cell, color) {
-    cell.addEventListener('mouseenter', (e) => fillCell(cell, color))
+function randomColor() {
+    // REFACTOR: write function getRandomElement(array) or similar
+    var result = Math.random() * 10;
+    if (result >= 9) {
+        return "blue";
+    }
+    else if (result >= 8) {
+        return "green";
+    }
+    else if (result >= 7) {
+        return "tomato";
+    }
+    else if (result >= 6) {
+        return "indigo";
+    }
+    else if (result >= 5) {
+        return "cornsilk";
+    }
+    else if (result >= 4) {
+        return "crimson";
+    }
+    else if (result >= 3) {
+        return "aquamarine";
+    }
+    else if (result >= 2) {
+        return "pink";
+    }
+    else if (result >= 1) {
+        return "magenta";
+    } else {
+        return "cyan";
+    }   
+}
+
+function makeCellResponsive (cell, color, inkEffect) {
+    cell.addEventListener('mouseenter', (e) => updateCellEffect(cell, color));
 }
 
 function makeAllCellsResponsive(color) {
