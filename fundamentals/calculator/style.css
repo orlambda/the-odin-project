@@ -1,0 +1,23 @@
+body {
+    background-color: black;
+    color: lightblue;
+}
+
+button {
+    color: rgb(211, 219, 213);
+    min-height: 50px;
+    min-width: 50px;
+    font-size: 32px;
+    border: none;
+    border-radius: 100%;
+
+}
+
+button.digit {
+    background-color:aquamarine;
+    color:rgb(54, 51, 61);
+}
+
+button.operator {
+    background-color:mediumslateblue;
+}
