@@ -40,16 +40,27 @@ function processInput(c) {
 }
 
 function processNumber(c) {
-    currentNumber = (currentNumber * 10) + parseInt(c);
-    console.log(currentNumber);
-    if (processingDecimal) {
+    if (!processingDecimal) {
+        currentNumber = (currentNumber * 10) + parseInt(c);
+        console.log(currentNumber);
+        console.log(interpretNumber(currentNumber));
+    } else {    
         decimalPlacesAdded++;
-    }  
-    // For after a decimal - but seems tricky to overcome floating point precision errors
-    // currentNumber += parseInt(c) / (10 ** (decimalPlacesAdded + 1));
-    // decimalPlacesAdded++;
-    // console.log(currentNumber);    
+        currentNumber = (currentNumber * 10) + parseInt(c);
+
+        // currentNumber *= 10 ** (decimalPlacesAdded);
+        // currentNumber += parseInt(c);
+        // currentNumber /= 10 ** (decimalPlacesAdded);
+
+        // currentNumber = currentNumber + +(parseInt(c) / (10 ** (decimalPlacesAdded))).toFixed(decimalPlacesAdded);
+        console.log(currentNumber);
+        console.log(interpretNumber(currentNumber));  
+    }
 }
+
+function interpretNumber(n) {
+    return n / 10 ** (decimalPlacesAdded);
+}  
 
 function processOperator(c) {
     if (c === ".") {
