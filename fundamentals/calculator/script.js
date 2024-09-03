@@ -1,14 +1,12 @@
-const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "-", "/", "*", "=", ".", "C"];
+// const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "-", "/", "*", "=", ".", "C"];
 // keys.forEach((key) => {
 //     const div = document.createElement("button");
 //     div.setAttribute('id', key);
 //     div.innerText = `${key}`;
 //     const main = document.querySelector(".main");
 //     main.appendChild(div);
-    
 // });
 
-let displayValue = 0;
 let currentOperand = 0;
 let currentNumber = 0;
 let processingDecimal = false;
@@ -17,11 +15,6 @@ let operandA = 0;
 let operandB = 0;
 let operator = undefined;
 let result = undefined;
-
-function updateDisplay(value) {
-    const display = document.querySelector(".display");
-    display.textContent = value;
-}
 
 updateDisplay(0);
 
@@ -64,12 +57,16 @@ function processNumber(c) {
         console.log(currentNumber);
         console.log(interpretNumber(currentNumber));  
     }
-    updateDisplay(interpretNumber(currentNumber));
+    updateDisplay(formatNumber(interpretNumber(currentNumber)));
 }
 
 function interpretNumber(n) {
     return n / 10 ** (decimalPlacesAdded);
-}  
+}
+
+function formatNumber(n) {
+    return n.toFixed(decimalPlacesAdded);
+}
 
 function processOperator(c) {
     if (c === ".") {
@@ -77,7 +74,7 @@ function processOperator(c) {
             return;
         } else {
             processingDecimal = true;
-            updateDisplay(`${currentNumber}.`);
+            updateDisplay(`${formatNumber(interpretNumber(currentNumber))}.`);
         }
     } else {
         updateDisplay(c);
@@ -86,21 +83,29 @@ function processOperator(c) {
 }
 
 function calculate(a, operator, b) {
-    
+    switch (operator) {
+        case "+":
+            return add(a, b);
+        case "-":
+            return subtract(a, b);
+        case "*":
+            return multiply(a, b);
+        case "/":
+            return divide(a, b);
+        default:
+            return "ERROR - unknown operator (expecting [+-*/]";
+    }    
 }
-
+// Operators
 function add(a, b) {
     return a + b;
 }
-
 function subtract(a, b) {
     return a - b;
 }
-
 function multiply(a, b) {
     return a * b;
 }
-
 function divide(a, b) {
     if (b === 0) {
         zeroError();
@@ -108,6 +113,12 @@ function divide(a, b) {
     }
     return a / b;
 }
+
+function updateDisplay(value) {
+    const display = document.querySelector(".display");
+    display.textContent = value;
+}
+
 
 /*
 
