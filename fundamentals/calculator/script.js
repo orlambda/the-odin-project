@@ -8,6 +8,7 @@ const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "-", "/", "
     
 // });
 
+let displayValue = 0;
 let currentOperand = 0;
 let currentNumber = 0;
 let processingDecimal = false;
@@ -16,6 +17,13 @@ let operandA = 0;
 let operandB = 0;
 let operator = undefined;
 let result = undefined;
+
+function updateDisplay(value) {
+    const display = document.querySelector(".display");
+    display.textContent = value;
+}
+
+updateDisplay(0);
 
 enableKeys();
 
@@ -56,6 +64,7 @@ function processNumber(c) {
         console.log(currentNumber);
         console.log(interpretNumber(currentNumber));  
     }
+    updateDisplay(interpretNumber(currentNumber));
 }
 
 function interpretNumber(n) {
@@ -68,7 +77,10 @@ function processOperator(c) {
             return;
         } else {
             processingDecimal = true;
+            updateDisplay(`${currentNumber}.`);
         }
+    } else {
+        updateDisplay(c);
     }
 
 }
