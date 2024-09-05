@@ -20,6 +20,9 @@ class Operand {
     }
 }
 
+// 0 means operand a, 1 means operand b, -1 means operator
+let lastProcessed = 0;
+
 // Return actual value of current number as signed float
 function interpretNumber(n) {
     n = n / 10 ** (currentOperand.decimalPlacesAdded);
@@ -36,8 +39,26 @@ let currentOperand = new Operand();
 let operandA = 0;
 let operandB = 0;
 
+let result = undefined;
+// If we've just calculated (using "="), reading a digit starts a new expression
+let justCalculated = false;
+
 // Undefined operator means we are reading operandA else operandB
 let operator = undefined;
+
+function resetCalculator() {
+    currentOperand = new Operand();
+    operator = undefined;
+    justCalculated = false;
+    result = undefined;
+    operandA = 0;
+    operandB = 0;
+    lastProcessed = 0;
+}
+
+resetDisplay();
+enableKeys();
+
 function calculate(a, operator, b) {
     switch (operator) {
         case "+":
@@ -69,13 +90,6 @@ function divide(a, b) {
     return a / b;
 }
 
-let result = undefined;
-// If we've just calculated (using "="), reading a digit starts a new expression
-let justCalculated = false;
-
-resetDisplay();
-enableKeys();
-
 function enableKeys() {
     const keys = document.querySelectorAll(".buttons button")
     Array.from(keys).forEach((key) => {
@@ -97,6 +111,9 @@ function processInput(c) {
 }
 
 function processDigitInput(c) {
+    if (lastProcessed === -1) {
+        lastProcessed = 1;
+    }
     if (!currentOperand.processingDecimal) {
         currentOperand.number_DigitsOnly = (currentOperand.number_DigitsOnly * 10) + parseInt(c);
         console.log(currentOperand.number_DigitsOnly);
@@ -115,16 +132,39 @@ function processDigitInput(c) {
 
 function processOperatorInput(c) {
     if (c === ".") {
-        if (currentOperand.processingDecimal) {
+        processDecimalPoint();
+        return;
+    }
+    if (c === "=") {
+        evaluate();
+        justCalculated = true;
+        return;
+    }
+    if (c === "C") {
+        resetCalculator();
+        resetDisplay();
+        return;
+    }
+    switch (lastProcessed) {
+        case 0:
+            lastProcessed = -1;
+            operator = c;
+            operandA = currentOperand.value();
+            currentOperand = new Operand();
+            updateDisplay(c);
+            break;
+        case 1:
+            evaluate();
+            lastProcessed = -1;
+            operator = c;
+            operandA = result;
+            currentOperand = new Operand();
+            break;
+        case -1:
+            break;
+        default:
+            updateDisplay(`ERROR: lastProcessed: ${lastProcessed}`);
             return;
-        } else {
-            currentOperand.processingDecimal = true;
-            updateDisplay(
-                `${formatNumber(interpretNumber(currentOperand.number_DigitsOnly),
-                    currentOperand.decimalPlacesAdded)}.`);
-        }
-    } else {
-        updateDisplay(c);
     }
 }
 
@@ -145,6 +185,38 @@ function resetDisplay() {
 function updateDisplay(value) {
     const display = document.querySelector(".display");
     display.textContent = value;
+}
+
+function processDecimalPoint() {
+    if (currentOperand.processingDecimal) {
+        return;
+    } else {
+        currentOperand.processingDecimal = true;
+        updateDisplay(
+            `${formatNumber(interpretNumber(currentOperand.number_DigitsOnly),
+                currentOperand.decimalPlacesAdded)}.`);
+        return;
+    }
+}
+
+function evaluate() {
+    console.log("Evaluating");
+    if (lastProcessed === -1) {
+        console.log("Last processed operator.");
+        return;
+    }
+    if (lastProcessed === 0) {
+        console.log("Last processed operandA.");
+        return;
+    }
+    if (operandB === undefined || operator === undefined) {
+        console.log(`Error: operandA: ${operandA}, operandB: ${operandB}, operator: ${operator}`);
+        return;
+    }
+    operandB = currentOperand.value();
+    result = calculate(operandA, operator, operandB);
+    updateDisplay(result);
+    return;
 }
 
 // const keys = ["1", "2", "3", "4", "5", "6", "7", "8", "9", "0", "+", "-", "/", "*", "=", ".", "C"];
