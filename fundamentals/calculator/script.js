@@ -1,21 +1,36 @@
 const maxDigitsOnDisplay = 15;
 
-// TODO: organise current number into a class
 // TODO (optional): store number as linked list to allow long numbers
+// or use library for precise calculation
 // Current number is the operand we are reading
 // Digits are stored separately to sign and decimal places
-let currentNumber_DigitsOnly = 0;
-let processingDecimal = false;
-let decimalPlacesAdded = 0;
-let currentNumberIsNegative = false;
+class Operand {
+    constructor() {
+        this.number_DigitsOnly = 0;
+        this.processingDecimal = false;
+        this.decimalPlacesAdded = 0;
+        this.negative = false;
+    }
+    value() {
+        let n = this.number_DigitsOnly / 10 ** (this.decimalPlacesAdded);
+        if (this.negative) {
+            return -n;
+        }
+        return n;
+    }
+}
+
 // Return actual value of current number as signed float
 function interpretNumber(n) {
-    n = n / 10 ** (decimalPlacesAdded);
-    if (currentNumberIsNegative) {
+    n = n / 10 ** (currentOperand.decimalPlacesAdded);
+    if (currentOperand.negative) {
         return -n;
     }
     return n;
 }
+
+// Currently reading
+let currentOperand = new Operand();
 
 // Operands we have finished reading
 let operandA = 0;
@@ -82,32 +97,31 @@ function processInput(c) {
 }
 
 function processDigitInput(c) {
-    if (!processingDecimal) {
-        currentNumber_DigitsOnly = (currentNumber_DigitsOnly * 10) + parseInt(c);
-        console.log(currentNumber_DigitsOnly);
-        console.log(interpretNumber(currentNumber_DigitsOnly));
+    if (!currentOperand.processingDecimal) {
+        currentOperand.number_DigitsOnly = (currentOperand.number_DigitsOnly * 10) + parseInt(c);
+        console.log(currentOperand.number_DigitsOnly);
+        console.log(interpretNumber(currentOperand.number_DigitsOnly));
+        console.log(currentOperand.value());
     } else {    
-        decimalPlacesAdded++;
-        currentNumber_DigitsOnly = (currentNumber_DigitsOnly * 10) + parseInt(c);
+        currentOperand.decimalPlacesAdded++;
+        currentOperand.number_DigitsOnly = (currentOperand.number_DigitsOnly * 10) + parseInt(c);
 
-        // currentNumber *= 10 ** (decimalPlacesAdded);
-        // currentNumber += parseInt(c);
-        // currentNumber /= 10 ** (decimalPlacesAdded);
-
-        // currentNumber = currentNumber + +(parseInt(c) / (10 ** (decimalPlacesAdded))).toFixed(decimalPlacesAdded);
-        console.log(currentNumber_DigitsOnly);
-        console.log(interpretNumber(currentNumber_DigitsOnly));  
+        console.log(currentOperand.number_DigitsOnly);
+        console.log(interpretNumber(currentOperand.number_DigitsOnly));
+        console.log(currentOperand.value());  
     }
-    updateDisplay(formatNumber(interpretNumber(currentNumber_DigitsOnly), decimalPlacesAdded));
+    updateDisplay(formatNumber(interpretNumber(currentOperand.number_DigitsOnly), currentOperand.decimalPlacesAdded));
 }
 
 function processOperatorInput(c) {
     if (c === ".") {
-        if (processingDecimal) {
+        if (currentOperand.processingDecimal) {
             return;
         } else {
-            processingDecimal = true;
-            updateDisplay(`${formatNumber(interpretNumber(currentNumber_DigitsOnly), decimalPlacesAdded)}.`);
+            currentOperand.processingDecimal = true;
+            updateDisplay(
+                `${formatNumber(interpretNumber(currentOperand.number_DigitsOnly),
+                    currentOperand.decimalPlacesAdded)}.`);
         }
     } else {
         updateDisplay(c);
