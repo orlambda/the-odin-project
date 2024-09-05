@@ -98,7 +98,7 @@ function processDigitInput(c) {
         console.log(currentNumber_DigitsOnly);
         console.log(interpretNumber(currentNumber_DigitsOnly));  
     }
-    updateDisplay(formatNumber(interpretNumber(currentNumber_DigitsOnly)));
+    updateDisplay(formatNumber(interpretNumber(currentNumber_DigitsOnly), decimalPlacesAdded));
 }
 
 function processOperatorInput(c) {
@@ -107,7 +107,7 @@ function processOperatorInput(c) {
             return;
         } else {
             processingDecimal = true;
-            updateDisplay(`${formatNumber(interpretNumber(currentNumber_DigitsOnly))}.`);
+            updateDisplay(`${formatNumber(interpretNumber(currentNumber_DigitsOnly), decimalPlacesAdded)}.`);
         }
     } else {
         updateDisplay(c);
@@ -115,10 +115,13 @@ function processOperatorInput(c) {
 }
 
 // Format current number for display
-function formatNumber(n) {
-    let output = n.toFixed(decimalPlacesAdded);
+function formatNumber(n, decimalPlaces) {
+    let output = n.toFixed(decimalPlaces);
     if (output.length > maxDigitsOnDisplay) {
         output = n.toExponential(12);
+    }
+    if (output.length > maxDigitsOnDisplay) {
+        output = n.toExponential(11);
     }
     return output;
 }
