@@ -1,3 +1,5 @@
+const maxDigitsOnDisplay = 15;
+
 // TODO: organise current number into a class
 // TODO (optional): store number as linked list to allow long numbers
 // Current number is the operand we are reading
@@ -110,12 +112,15 @@ function processOperatorInput(c) {
     } else {
         updateDisplay(c);
     }
-
 }
 
 // Format current number for display
 function formatNumber(n) {
-    return n.toFixed(decimalPlacesAdded);
+    let output = n.toFixed(decimalPlacesAdded);
+    if (output.length > maxDigitsOnDisplay) {
+        output = n.toExponential(12);
+    }
+    return output;
 }
 function resetDisplay() {
     updateDisplay(0);
