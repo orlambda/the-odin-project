@@ -178,12 +178,10 @@ function processOperatorInput(c) {
 
 // Format current number for display
 function formatNumber(n, decimalPlaces) {
-    let output = n.toFixed(decimalPlaces);
-    if (output.length > maxDigitsOnDisplay) {
-        output = n.toExponential(12);
-    }
-    if (output.length > maxDigitsOnDisplay) {
-        output = n.toExponential(11);
+    let output = `${parseFloat(n.toFixed(maxDigitsOnDisplay))}`;
+    let i = 12;
+    while (output.length > maxDigitsOnDisplay) {
+        output = n.toExponential(i--);
     }
     return output;
 }
@@ -223,7 +221,7 @@ function evaluate() {
     }
     operandB = currentOperand.value();
     result = calculate(operandA, operator, operandB);
-    updateDisplay(result);
+    updateDisplay(formatNumber(result, maxDigitsOnDisplay));
     return;
 }
 
