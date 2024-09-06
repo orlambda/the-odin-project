@@ -5,11 +5,32 @@ const maxDigitsOnDisplay = 15;
 // Current number is the operand we are reading
 // Digits are stored separately to sign and decimal places
 class Operand {
-    constructor() {
+    constructor(n) {
+        console.log(`making Operand. n is ${n}`);
         this.number_DigitsOnly = 0;
         this.processingDecimal = false;
         this.decimalPlacesAdded = 0;
         this.negative = false;
+        if (n !== undefined) {
+            console.log("n is defined");
+            if (n < 0) {
+                console.log("n is less than 0");
+                n = -n;
+                this.negative = true;
+                console.log(`n is now ${n}`);
+            }
+            n = `${n}`;
+            console.log(n);
+            if (n.indexOf('.') != -1) {
+                this.processingDecimal = true;
+                n = n.split('.');
+                console.log(n)
+                this.decimalPlacesAdded = n[1].length;
+                n = n[0] + n[1];
+            }
+            n = parseFloat(n);
+            this.number_DigitsOnly = n;
+        }
     }
     value() {
         let n = this.number_DigitsOnly / 10 ** (this.decimalPlacesAdded);
@@ -221,6 +242,10 @@ function evaluate() {
     }
     operandB = currentOperand.value();
     result = calculate(operandA, operator, operandB);
+    currentOperand = new Operand(result);
+    console.log(`evaluted. current operand value is ${currentOperand.value()}, result is ${result}`);
+    operandA = currentOperand.value();
+    lastProcessed = 0;
     updateDisplay(formatNumber(result, maxDigitsOnDisplay));
     return;
 }
