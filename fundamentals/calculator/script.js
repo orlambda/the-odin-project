@@ -14,7 +14,7 @@ class Operand {
     value() {
         let n = this.number_DigitsOnly / 10 ** (this.decimalPlacesAdded);
         if (this.negative) {
-            return -n;
+            return parseFloat(-n);
         }
         return n;
     }
@@ -150,7 +150,7 @@ function processOperatorInput(c) {
     }
     if (c === "+-") {
         currentOperand.toggleNegative();
-        updateDisplay(formatNumber(currentOperand.value()), currentOperand.decimalPlacesAdded);
+        updateDisplay(formatNumber(currentOperand.value(), currentOperand.decimalPlacesAdded));
         return;
     }
     switch (lastProcessed) {
