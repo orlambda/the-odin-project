@@ -18,6 +18,9 @@ class Operand {
         }
         return n;
     }
+    toggleNegative() {
+        this.negative = !this.negative;
+    }
 }
 
 // 0 means operand a, 1 means operand b, -1 means operator
@@ -143,6 +146,11 @@ function processOperatorInput(c) {
     if (c === "C") {
         resetCalculator();
         resetDisplay();
+        return;
+    }
+    if (c === "+-") {
+        currentOperand.toggleNegative();
+        updateDisplay(formatNumber(currentOperand.value()), currentOperand.decimalPlacesAdded);
         return;
     }
     switch (lastProcessed) {
