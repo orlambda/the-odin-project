@@ -1,0 +1,20 @@
+body {
+    display: flex;
+}
+
+left {
+    display: flex;
+}
+
+right {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-section {
+    display: flex;
+}
+
+.button-section {
+    display: flex;
+}
