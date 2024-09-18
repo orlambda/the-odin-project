@@ -1,5 +1,6 @@
 table {
     border: black 2px solid;
+    margin: 8px;
 }
 
 th {
@@ -12,3 +13,4 @@ td {
     color: lightblue;
     background-color: antiquewhite;    
 }
+
