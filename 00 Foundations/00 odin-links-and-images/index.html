@@ -1,0 +1,32 @@
+<!--
+    This project follows the Links and Images lesson 
+ https://www.theodinproject.com/lessons/foundations-links-and-images
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta>
+        <title>Odin Links and Images</title>
+
+    </head>
+    <body>
+        <h1>Homepage</h1>
+        <!--
+            The noopener value prevents the opened link from gaining access to the webpage from which it was opened.
+            The noreferrer value prevents the opened link from knowing which webpage or resource has a link (or ‘reference’) to it.
+            It also includes the noopener behaviour and thus can be used by itself as well.
+
+            It is recommended to always pair a target="_blank" with a rel="noopener noreferrer".
+        -->
+        <!-- Absolute path -->
+        <a href="https://www.theodinproject.com/about" target="_blank" rel="noopener noreferrer">About the Odin Project (new tab)</a>
+        <!-- Absolute path -->
+        <img src="https://www.theodinproject.com/mstile-310x310.png" alt="The Odin Project Logo" height="250" width="250">
+        <!-- Relative path -->
+        <a href="./pages/about.html">About</a>
+        <!-- Relative path -->
+        <img src="./images/dog.jpg" alt="A dog" height="350" width="250">
+    </body>
+</html>
